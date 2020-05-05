@@ -1,0 +1,26 @@
+jam=`date +%H`
+if [ $jam -ge 04 -a $jam -le 10 ]
+then
+        sapaan="\e[92mGood morning\e[39m"
+elif [ $jam -ge 11 -a $jam -le 14 ]
+then
+        sapaan="\e[93mGood afternoon\e[39m"
+elif [ $jam -ge 15 -a $jam -le 20 ]
+then
+        sapaan="\e[94mGood evening\e[39m"
+else
+        sapaan="\e[90mGood night\e[39m"
+fi
+
+#----------
+
+if [ "$(whoami)" != "root" ]
+then
+        namamu="$(getent passwd `whoami` | cut -d ':' -f 5 | cut -d ',' -f 1)"
+        namayou="\e[36m$namamu\e[39m"
+else
+        namamu="$(getent passwd `whoami` | cut -d ':' -f 5 | cut -d ',' -f 1)"
+        namayou="\e[91m$namamu\e[39m"
+fi
+#----------
+echo -e "\e[1mWelcome to \e[35m$(hostname)\e[39m :) \e[1m$sapaan\e[24m $namayou, Have a nice day..\e[24m"
